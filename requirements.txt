@@ -1,0 +1,5 @@
+flask-apscheduler==1.12.3
+flask
+requests
+gunicorn==22.0.0
+

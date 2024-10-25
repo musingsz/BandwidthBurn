@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* 设置字体 */
+            background-color: #f4f4f4; /* 背景颜色 */
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333; /* 主标题颜色 */
+        }
+        .container {
+            display: flex;
+            justify-content: space-between; /* 使表格左右对齐 */
+            margin-top: 20px; /* 顶部间距 */
+        }
+        .report_left {
+            background: white; /* 报告背景 */
+            border-radius: 8px; /* 圆角 */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+            padding: 10px; /* 内边距 */
+            width: 35%; /* 宽度 */
+        }
+        .report {
+            background: white; /* 报告背景 */
+            border-radius: 8px; /* 圆角 */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+            padding: 10px; /* 内边距 */
+            width: 55%; /* 宽度 */
+        }
+        table {
+            width: 100%; /* 表格宽度 */
+            border-collapse: collapse; /* 合并边框 */
+            margin-top: 10px; /* 表格顶部间距 */
+        }
+        th, td {
+            padding: 10px; /* 单元格内边距 */
+            text-align: left; /* 左对齐 */
+            border: 1px solid #ddd; /* 边框 */
+        }
+        th {
+            background-color: #f2f2f2; /* 表头背景颜色 */
+            color: #333; /* 表头文字颜色 */
+        }
+        tr:hover {
+            background-color: #f1f1f1; /* 鼠标悬停效果 */
+        }
+    </style>
+</head>
+<body>
+    
+    <center><h1>Download Reports</h1></center>
+    <div class="container">
+        <div class="report_left">
+            <h2>12 Month's Download Report</h2>
+            <table>
+                <tr>
+                    <th>Month</th>
+                    <th>Total Downloaded (GB)</th>
+                </tr>
+                {% for month, total_downloaded in total_data %}
+                <tr>
+                    <td>{{ month }}</td>
+                    <td>{{ (total_downloaded / (1024 * 1024 * 1024)) | round(2)  }} GB</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        
+        <div class="report">
+            <h2>30 Day's Hourly Download Report</h2>
+            <table>
+                <tr>
+                    <th>Hour</th>
+                    <th>Total Downloaded (MB)</th>
+                    <th>Total Downloaded (GB)</th>
+                </tr>
+                {% for hour, total_downloaded in report_data %}
+                <tr>
+                    <td>{{ hour }}</td>
+                    <td>{{ (total_downloaded / (1024 * 1024))|int }} MB</td>
+                    <td>{{ (total_downloaded / (1024 * 1024 * 1024)) | round(2)  }} GB</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>
